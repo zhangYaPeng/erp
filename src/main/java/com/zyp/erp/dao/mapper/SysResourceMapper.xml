@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyp.erp.dao.SysResourceMapper">
+  <resultMap id="BaseResultMap" type="com.zyp.erp.domain.SysResource">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <select id="listResourceByUserId4PC" resultType="com.zyp.erp.domain.SysResource">
+    select
+          r.`id`,
+          r.`parent_id` as parentId,
+          r.`name`,
+          r.`url`,
+          r.`icon`,
+          r.`sort`,
+          r.`resource_type` as resourceType,
+          r.`app_type` as appType,
+          r.`state`,
+          r.`deleted`,
+          r.`add_time` as addTime,
+          r.`update_time` as updateTime,
+          r.`remark`
+    from sys_resource r
+    INNER join sys_resource_role rr on rr.resource_id = r.id
+    INNER join sys_role_user ru on ru.role_id = rr.role_id
+    INNER join sys_role role on role.id = ru.role_id
+    INNER join sys_user u on u.id = ru.user_id
+    where r.app_type = 1
+    and r.resource_type = 1
+    and r.state = 1
+    and r.deleted = 0
+    and role.state = 1
+    and role.deleted = 0
+    and ru.user_id = #{userId}
+    and u.state = 1
+	and u.deleted = 0
+    order by r.sort asc
+  </select>
+
+
+    <select id="findByAppType" resultType="com.zyp.erp.vo.back.SysResourceVO">
+        SELECT
+              r.`id`,
+              r.`parent_id` as parentId,
+              r.`name`,
+              r.`url`,
+              r.`icon`,
+              r.`sort`,
+              r.`resource_type` as resourceType,
+              r.`app_type` as appType,
+              r.`state`,
+              r.`deleted`,
+              r.`add_time` as addTime,
+              r.`update_time` as updateTime,
+              r.`remark`
+        FROM sys_resource r
+        WHERE r.`app_type` = #{appType}
+        order by r.sort asc
+    </select>
+
+</mapper>
