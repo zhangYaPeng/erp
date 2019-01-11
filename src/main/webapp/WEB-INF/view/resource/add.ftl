@@ -34,7 +34,7 @@
                 <div class="row cl">
                     <label class="form-label col-sm-2 col-md-2">资源URL：</label>
                     <div class="formControls col-sm-3 col-md-8">
-                        <input class=" input-text" type="text" name="resourceUrl" value="">
+                        <input class=" input-text" type="text" name="url" value="">
                     </div>
                 </div>
 
