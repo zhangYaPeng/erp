@@ -4,7 +4,6 @@ import com.zyp.erp.utils.MenuContext;
 import com.zyp.erp.utils.login.LoginUser;
 import com.zyp.erp.utils.login.UserContext;
 import com.zyp.erp.vo.back.MenuVO;
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +47,10 @@ public class LoginMenuInterceptor extends AbstractHandlerInterceptorAdapter {
                         currentMenuSubId = sub.getId();
                         break;
                     }
+                }
+
+                if ( currentMenuId != 0 && currentMenuSubId != 0 ) {
+                    break;
                 }
             }
 
