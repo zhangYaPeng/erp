@@ -2,7 +2,7 @@
 
 ### 如何启动
 
->> IDEA下启动方式  
+> IDEA下启动方式  
 1. vm Options中追加如下的参数(后面的路径为项目的绝对路径)
 ```
 -Dapp.instance.properties="/Users/panda_zyp/Documents/Java/IDEA_WorkSpace/erp/config/dev"       
