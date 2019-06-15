@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyp.erp.dao.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.zyp.erp.domain.SysRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <select id="listPage" resultType="com.zyp.erp.vo.back.SysRoleVO">
+    select
+          r.id,
+          r.`name`,
+          r.role,
+          r.state,
+          r.deleted,
+          r.add_time as addTime,
+          r.update_time as updateTime,
+          r.remark as remark
+    from sys_role r
+    <where>
+      <if test='query.name != null and query.name != ""'>
+        r.`name` like CONCAT(CONCAT('%', #{query.name}), '%')
+      </if>
+    </where>
+    order by r.add_time desc
+  </select>
+
+</mapper>

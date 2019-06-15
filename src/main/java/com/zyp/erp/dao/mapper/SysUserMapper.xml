@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyp.erp.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.zyp.erp.domain.SysUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+
+  <select id="listPage" resultType="com.zyp.erp.vo.back.SysUserVO">
+    select
+        u.id,
+        u.user_name as userName,
+        u.password,
+        u.real_name as realName,
+        u.phone,
+        u.pic,
+        u.state,
+        u.deleted,
+        u.add_time as addTime,
+        u.update_time as updateTime,
+        u.remark as remark
+    from sys_user u
+    <where>
+      <if test='query.userName != null and query.userName != ""'>
+        u.user_name = #{query.userName}
+      </if>
+      <if test='query.phone != null and query.phone != ""'>
+        and u.phone = #{query.phone}
+      </if>
+    </where>
+    order by u.add_time desc
+  </select>
+
+</mapper>
