@@ -268,7 +268,7 @@
         <dependency> <!--指定log4j-core的版本，防止其他框架造成干扰-->
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.5</version>
+            <version>2.15.0</version>
         </dependency>
 
         <dependency> <!--log4j2 异步依赖-->
